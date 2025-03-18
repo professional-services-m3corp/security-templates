@@ -23,7 +23,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: executing package for veracode sast scan
-        id: veracode package for Javascript or Typescript 
         if: ${{ inputs.javascriptTypescript }}
         run: |
           which tar
