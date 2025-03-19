@@ -26,7 +26,8 @@ jobs:
         id: veracode_package_for_Javascript_or_Typescript 
         if: ${{ inputs.javascriptTypescript }}
         run: |
-          find . -name "*.js" -o -name "*.html" -o -name "*.htm" -o -name "*.ts" -o -name "*.tsx" -o -name "*.json" -o -name "*.css" -o -name "*.jsp" -o -name "*.vue" | tar --exclude-vcs --exclude=**./*bin  --exclude=**./*github --exclude=**./*e2e --exclude=**./*tests --exclude=**./*node_modules --exclude=*.png --exclude=*.xml --exclude=*.jpg --exclude=*.svg --exclude=*.config --exclude=*.ini --exclude=*.pdf --exclude=*.dat --exclude=*.docx --exclude=*.so --exclude=*.sql --exclude=*.yml --exclude=*.yaml --exclude=*.md --exclude=*.ttf --exclude=*.Docker --exclude=*.min --exclude=*-min --exclude=*.sample --exclude=*.ico --exclude=*.min --exclude=*.mock -cvzf upload.tar.gz .
+          find . -name "*.js" -o -name "*.html" -o -name "*.htm" -o -name "*.ts" -o -name "*.tsx" -o -name "*.json" -o -name "*.css" -o -name "*.jsp" -o -name "*.vue" | tar --exclude-vcs --exclude=**./*bin  --exclude=**./*github --exclude=**./*e2e --exclude=**./*tests --exclude=**./*node_modules --exclude=*.png --exclude=*.xml --exclude=*.jpg --exclude=*.svg --exclude=*.config --exclude=*.ini --exclude=*.pdf --exclude=*.dat --exclude=*.docx --exclude=*.so --exclude=*.sql --exclude=*.yml --exclude=*.yaml --exclude=*.md --exclude=*.ttf --exclude=*.Docker --exclude=*.min --exclude=*-min --exclude=*.sample --exclude=*.ico --exclude=*.min --exclude=*.mock -cvzf upload.tar.gz
+      
       - name: upload to artifact
         uses: actions/upload-artifact@v4
         with:
