@@ -21,6 +21,9 @@ on:
       failBuild:
         required: true
         type: string
+      moduleScannable:
+        required: false
+        type: string
 
 jobs:
   pipeline_scan:
@@ -51,7 +54,6 @@ jobs:
           file: ${{ inputs.veracodeArtifact }}
           fail_build: ${{ inputs.failBuild }}
           issue_details: true
-          summary_output_file: summary-results.json
           veracode_policy_name: ${{ inputs.policyName }}
           policy_file: ${{ inputs.policyName }}.json
 
