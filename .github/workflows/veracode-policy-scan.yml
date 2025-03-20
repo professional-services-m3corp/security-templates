@@ -1,0 +1,62 @@
+name: Veracode Static Policy Scanner
+
+on:
+  workflow_call:
+    inputs:
+      profile_name:
+        required: true
+        type: string
+      policy_name:
+        required: true
+        type: string
+      modules_to_scan:
+        required: true
+        type: string
+      owner:
+        required: true
+        type: string
+      repo:
+        required: true
+        type: string
+      break_build_on_error: 
+          required: true
+          type: string
+      filter_mitigated_flaws: 
+          required: true
+          type: string
+
+jobs:
+  pipeline_scan:
+    runs-on: ubuntu-latest
+    name: policy scan
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      
+      # get the compiled binary from a previous job
+      - name: get archive
+        uses: actions/download-artifact@v4
+        with:
+          name: veracode-artifact
+          path: ./veracode_artifact_directory
+      
+      - name: set version
+        run: |
+          echo "VERSION=${{ github.run_id }}-$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+
+      # run the policy scan action
+      - name: Veracode Upload and Policy Scan Action
+        uses: veracode/uploadandscan-action@v0.1.6
+        id: policy_upload_and_scan
+        with:
+          appname: ${{ inputs.profile_name }}
+          createprofile: true
+          policy: ${{ inputs.policy_name }}
+          version: '${{ env.VERSION }}'
+          filepath: ./veracode_artifact_directory/
+          vid: '${{ secrets.VERACODE_API_ID }}'
+          vkey: '${{ secrets.VERACODE_API_KEY }}'
+          #scanpollinginterval: 30
+          #scantimeout: 30
+          # include: ${{ inputs.modules_to_scan }}
