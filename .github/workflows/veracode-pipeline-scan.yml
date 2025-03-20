@@ -38,11 +38,11 @@ jobs:
           name: veracode-artifact
           path: ./veracode_artifact_directory
       
-      - name: Get the name of the downloaded files
-        run: |
-          artifact_file=$(ls -1 ./veracode_artifact_directory | head -n 1)
-          echo "artifact_file=$artifact_file" >> $GITHUB_ENV
-          echo $GITHUB_ENV          
+   #   - name: Get the name of the downloaded files
+   #     run: |
+   #       artifact_file=$(ls -1 ./veracode_artifact_directory | head -n 1)
+   #       echo "artifact_file=$artifact_file" >> $GITHUB_ENV
+   #       echo $GITHUB_ENV          
 
       # run the pipeline scan action
       - name: Veracode Pipeline-Scan
@@ -55,5 +55,6 @@ jobs:
           vid: ${{ secrets.VERACODE_API_ID }}
           vkey: ${{ secrets.VERACODE_API_KEY }}
          # veracode_policy_name: ${{ inputs.policyName }}
-          file: ./veracode_artifact_directory/${{ env.artifact_file }}
+        #  file: ./veracode_artifact_directory/${{ env.artifact_file }}
+          file: ${{ inputs.veracodeArtifact }}
           fail_build: ${{ inputs.failBuild }}
