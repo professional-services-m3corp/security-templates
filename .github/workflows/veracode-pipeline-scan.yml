@@ -52,6 +52,8 @@ jobs:
           fail_build: ${{ inputs.failBuild }}
           issue_details: true
           summary_output_file: summary-results.json
+          veracode_policy_name: ${{ inputs.policyName }}
+          policy_file: ${{ inputs.policyName }}.json
 
       # save json results
       - name: save json results
