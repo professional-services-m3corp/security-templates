@@ -54,18 +54,6 @@ jobs:
           summary_output_file: summary-results.json
 
       # save json results
-      - name: save sumary results
-        uses: actions/upload-artifact@v4
-        with:
-            name: summary-results
-            path: summary_results.json
-      
-      - name: save filtered results
-        uses: actions/upload-artifact@v4
-        with:
-            name: filtered-results
-            path: filtered_results.json
-
       - name: save json results
         uses: actions/upload-artifact@v4
         with:
