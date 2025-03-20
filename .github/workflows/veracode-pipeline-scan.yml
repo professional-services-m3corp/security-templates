@@ -42,6 +42,7 @@ jobs:
         run: |
           artifact_file=$(ls -1 ./veracode_artifact_directory | head -n 1)
           echo "artifact_file=$artifact_file" >> $GITHUB_ENV
+          echo $GITHUB_ENV          
 
       # run the pipeline scan action
       - name: Veracode Pipeline-Scan
